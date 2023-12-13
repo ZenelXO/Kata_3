@@ -9,9 +9,14 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class MainFrame extends JFrame {
-    public MainFrame() throws HeadlessException {
+    public Map<String, Integer> histogramData;
+
+    public MainFrame(Map<String, Integer> histogramData) throws HeadlessException {
+        this.histogramData = histogramData;
+
         this.setTitle("Histogram Viewer");
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
@@ -26,7 +31,7 @@ public class MainFrame extends JFrame {
 
     private CategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
+        histogramData.forEach((key, value) -> dataset.addValue(value, "", key));
         return dataset;
     }
 }
